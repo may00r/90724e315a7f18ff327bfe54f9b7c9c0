@@ -5,3 +5,6 @@ Password: admin
 
 User: guest
 Password: guest
+
+Restore DB
+cat your_dump.sql | docker exec -i your-db-container psql -U your-db-user -d your-db-name
