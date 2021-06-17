@@ -4,5 +4,5 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.current_datetime, name='current_datetime'),
+    path('', views.go_to_admin, name='current_datetime'),
 ]

@@ -1,8 +1,6 @@
 from django.http import HttpResponse
-import datetime
+from django.shortcuts import redirect
 
 
-def current_datetime(request):
-    now = datetime.datetime.now()
-    html = "It is now %s." % now
-    return HttpResponse(html)
+def go_to_admin(request):
+    return redirect('/admin')

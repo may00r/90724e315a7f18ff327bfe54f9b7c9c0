@@ -20,13 +20,15 @@ services:
     restart: always  
 
   db:
-    image: postgres:13.3-alpine
-    volumes:
-      - ./data/db:/var/lib/postgresql/data
+    image: postgres:13.3-buster
+    user: 1000:1000 # Delete before first start
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      - PGDATA=/pg-data
+    volumes:
+      - ./pg-data:/pg-data
     ports: 
         - "5432:5432"
     restart: always
