@@ -21,7 +21,6 @@ services:
 
   db:
     image: postgres:13.3-buster
-    user: 1000:1000 # Delete before first start
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
