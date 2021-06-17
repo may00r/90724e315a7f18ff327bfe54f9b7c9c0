@@ -1,0 +1,57 @@
+version: "3.3"
+
+services:
+  rabbitmq:
+    image: rabbitmq:3.8.17-alpine
+    ports:
+        - "5672:5672"
+    restart: always
+
+  highcharts:
+    image: onsdigital/highcharts-export-node
+    ports:
+        - "8889:8080"
+    restart: always
+
+  redis:
+    image: redis:6.2.4-alpine
+    ports:
+        - "6379:6379"
+    restart: always  
+
+  db:
+    image: postgres:13.3-alpine
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports: 
+        - "5432:5432"
+    restart: always
+
+  web:
+    build: .
+    image: test-task_web
+    command: python3 manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./charts:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - rabbitmq
+      - redis
+      - highcharts
+    restart: always
+
+  celery:
+    image: test-task_web
+    command: celery -A charts worker -l INFO
+    volumes:
+      - ./charts:/code
+    depends_on:
+      - rabbitmq
+      - web
+    restart: always
