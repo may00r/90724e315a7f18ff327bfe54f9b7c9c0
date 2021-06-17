@@ -3,5 +3,5 @@
 Superuser: admin
 Password: admin123
 
-User: Guest
-Password: Guest
+User: guest
+Password: guest
