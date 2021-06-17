@@ -7,4 +7,4 @@
 **Password**: guest
 
 ## Restore DB  
-cat *your_dump.sql* | docker exec -i *your-db-container* psql -U *your-db-user* -d *your-db-name*
+cat *dump_2021-06-17_16_50_32.sql* | docker exec -i *your-db-container* psql -U *your-db-user* -d *your-db-name*
